@@ -10,10 +10,20 @@ const options = {
       border: "#222222",
       background: "#666666"
     },
-    font: { color: "#eeeeee" }
+    font: { color: "#eeeeee" },
+    shape: "circle",
+    color: "#ee00ee"
   },
   edges:{
     color: "#eeeeee",
+    length: 500,
+    arrows: ''
+  },
+  layout:{
+    hierarchical: false
+  },
+  physics:{
+    stabilization: false
   }
 };
 
@@ -27,9 +37,6 @@ const events = {
     console.log(edges);
   }
 };
-
-
-
 
 
 class NodeGraph extends React.Component{
@@ -59,7 +66,7 @@ class NodeGraph extends React.Component{
     nodes.push({id: node["@id"], label: node["@id"], title: node["@id"]})
 
     for(var i = 0;i < node["edges"].length;i++){
-      if(node["edges"][i]["surfaceText"] != ''){
+      if(node["edges"][i]["surfaceText"] != null){
       nodes.push({id: node["edges"][i]["@id"], label: node["edges"][i]["surfaceText"], title: node["edges"][i]["@id"]});
       edges.push({from: startingID, to:node["edges"][i]["@id"]});
       }
