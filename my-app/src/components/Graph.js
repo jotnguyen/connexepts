@@ -12,7 +12,7 @@ const options = {
     },
     font: { color: "#eeeeee" },
     shape: "circle",
-    color: "#ee00ee"
+    color: "#7a0099"
   },
   edges:{
     color: "#eeeeee",
@@ -21,9 +21,6 @@ const options = {
   },
   layout:{
     hierarchical: false
-  },
-  physics:{
-    stabilization: false
   }
 };
 
