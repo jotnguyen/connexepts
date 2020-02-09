@@ -1,27 +1,25 @@
 import Graph from "react-graph-vis";
 import React from 'react';
 
-var nodes = [];
-
-var edges = [];
 
 const options = {
-  layout: {
-    hierarchical: false
+  nodes: {
+    borderWidth: 5,
+    size: 100,
+    color: {
+      border: "#222222",
+      background: "#666666"
+    },
+    font: { color: "#eeeeee" }
   },
-  nodes:{
-    shape: "circle",
-    color: "#e00000",
-  },
-  edges: {
-    color: "#000000",
-    length: 100,
-    arrows: ''
+  edges:{
+    color: "#eeeeee",
   }
 };
 
+
 const events = {
-  select: function(event) {
+  click: function(event) {
     var { nodes, edges } = event;
     console.log("Selected nodes:");
     console.log(nodes);
@@ -51,7 +49,7 @@ class NodeGraph extends React.Component{
     console.log(JSON.parse(json));
     let node = JSON.parse(json);
     const newGraph = {
-      nodes:  node["edges"].map( (edge) => {return {id : edge["@id"], label: edge["@id"], title: edge["@id"] }} )      ,
+      nodes:  node["edges"].map( (edge) => {return {id : edge["@id"], label: edge["surfaceText"], title: edge["@id"] }} )      ,
       edges:  node["edges"].map( ( edge) => {return {from : edge["start"]["@id"], to: edge["end"]["@id"] } })    
     }
     return newGraph
@@ -61,7 +59,9 @@ class NodeGraph extends React.Component{
     console.log('result '+results)
     if(results == ""){
       return(
-        <h1>please enter a topic you would like to learn more about and explore</h1>
+        <div id="graph">
+          <h1 style={{color: "red"}}>please enter a topic you would like to learn more about and explore</h1>
+        </div>
       )
     }else{
       console.log(results)
@@ -70,8 +70,8 @@ class NodeGraph extends React.Component{
       // return(<div>hey</div>)
 
     return(
-      <div>
-        <Graph graph={result} options={options} events={events} style={{ height: "640px"}} />
+      <div id="graph">
+        <Graph graph={result} options={options} events={events} style={{ height: "920px"}} />
       </div>
     )
     }

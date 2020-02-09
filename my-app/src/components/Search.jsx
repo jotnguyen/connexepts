@@ -35,15 +35,18 @@ class Search extends React.Component{
   
     onSubmit = () => {
         // console.log(axios.get('/poop'))
-        axios.get('/'+this.state.query)
-            .then( (response) => {
-            // console.log(response.data);
-            this.setState({results: response.data});
-            // console.log(response.status);
-            // console.log(response.statusText);
-            // console.log(response.headers);
-            // console.log(response.config);
-  });
+
+        if(this.state.query != ""){
+            const new_query = this.state.query.split(' ').join('_')
+            axios.get('/'+new_query)
+                .then( (response) => {
+                // console.log(response.data);
+                this.setState({results: response.data});
+                // console.log(response.status);
+                // console.log(response.statusText);
+                // console.log(response.headers);
+                // console.log(response.config);
+        })};
     }
     render () {
       const {query} = this.state.query;
@@ -51,7 +54,7 @@ class Search extends React.Component{
         return (
             <div className="container">
              {/*Heading*/}
-             <h2 className="heading">Live Search: React Application</h2>
+             <h2 className="heading">Connecepts, a Concept Connection for Any and Everything</h2>
               {/* Search input*/}
               <label className="search-label" htmlFor="search-input">
                   <input

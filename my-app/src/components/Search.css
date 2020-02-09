@@ -1,7 +1,7 @@
 .heading {
 	font-size: 30px;
 	padding: 16px 0;
-	color: #444;
+	color: goldenrod;
 	text-align: center;
 }
 
@@ -9,7 +9,7 @@
 .container {
 	margin: 36px auto;
 	width: 100%;
-	max-width: 800px;
+	max-width: 1000px;
 }
 
 
@@ -18,13 +18,14 @@
 }
 
 .container input {
-	width: 100%;
+	width: 70%;
 	padding: 16px;
 	font-size: 36px;
 	font-style: italic;
-	color: #444;
+	color: rgb(105, 78, 78);
 	box-sizing: border-box;
 	outline: none;
+	
 }
 
 .search-icon {
