@@ -2,6 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Search from "./components/Search.jsx"
+import Graph from "./components/Graph.js"
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
 
 
       <Search/>
+      <Graph/>
     </div>
 
   );
@@ -19,3 +21,4 @@ function App() {
 
 
 export default App;
+
