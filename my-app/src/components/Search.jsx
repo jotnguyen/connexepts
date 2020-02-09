@@ -8,7 +8,7 @@ class Search extends React.Component{
 
         this.state = {
             query: '',
-            results:{ nodes : [ {id: 1, label: "?", title:"?"}], edges: []},
+            results:"",
             loading: false,
             message: ''
         }
@@ -29,20 +29,20 @@ class Search extends React.Component{
         if (e.key === 'Enter') {
           e.preventDefault();
           e.stopPropagation();
-          this.onSubmit();
+          this.onSubmit(this.state.query);
         }
       }
   
     onSubmit = () => {
         // console.log(axios.get('/poop'))
-        axios.get('/poop')
-            .then(function (response) {
-            console.log(response.data);
-            this.props.result = response.data;
-            console.log(response.status);
-            console.log(response.statusText);
-            console.log(response.headers);
-            console.log(response.config);
+        axios.get('/'+this.state.query)
+            .then( (response) => {
+            // console.log(response.data);
+            this.setState({results: response.data});
+            // console.log(response.status);
+            // console.log(response.statusText);
+            // console.log(response.headers);
+            // console.log(response.config);
   });
     }
     render () {
@@ -69,7 +69,7 @@ class Search extends React.Component{
            
            
            
-            <Graph result = {this.state.results}/>
+            <Graph results = {this.state.results}/>
             </div>
         )
     }

@@ -47,14 +47,34 @@ class NodeGraph extends React.Component{
           
       }
   }
+  parseJSON = (json) => {
+    console.log(JSON.parse(json));
+    let node = JSON.parse(json);
+    const newGraph = {
+      nodes:  node["edges"].map( (edge) => {return {id : edge["@id"], label: edge["@id"], title: edge["@id"] }} )      ,
+      edges:  node["edges"].map( ( edge) => {return {from : edge["start"]["@id"], to: edge["end"]["@id"] } })    
+    }
+    return newGraph
+  }
+  render(){
+    const results = this.props.results
+    console.log('result '+results)
+    if(results == ""){
+      return(
+        <h1>please enter a topic you would like to learn more about and explore</h1>
+      )
+    }else{
+      console.log(results)
+      let result = this.parseJSON(results)
+      console.log(result)
+      // return(<div>hey</div>)
 
-render(){
-  const result = this.props.result;
-  return(
-    <div>
-      <Graph graph={result} options={options} events={events} style={{ height: "640px"}} />
-    </div>
-  )
+    return(
+      <div>
+        <Graph graph={result} options={options} events={events} style={{ height: "640px"}} />
+      </div>
+    )
+    }
   }
 }
 export default NodeGraph
