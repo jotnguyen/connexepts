@@ -2,30 +2,49 @@ import React from 'react';
 import './Search.css'
 import axios from 'axios';
 class Search extends React.Component{
-constructor(props) {
-    super(props);
+    constructor(props) {
+        super(props);
 
-    this.state = {
-        query: '',
-        results:{},
-        loading: false,
-        message: ''
+        this.state = {
+            query: '',
+            results:{},
+            loading: false,
+            message: ''
+        }
     }
-}
 
-/*fetchSearchResults = ( updatedPageNo, query) =>{
-    const searchUrl =
+    /*fetchSearchResults = ( updatedPageNo, query) =>{
+        const searchUrl =
 
-};*/
+    };*/
 
-handleOnInputChange = (event) => {
-    const query = event.target.value;
-  this.setState ({query, loading: true, message: ''});
-
-
-};
+    handleOnInputChange = (event) => {
+        const query = event.target.value;
+        this.setState ({query, loading: true, message: ''});
+    };
+    onKeyDown = (e) => {
+        // 'keypress' event misbehaves on mobile so we track 'Enter' key via 'keydown' event
+        // console.log(e)
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          e.stopPropagation();
+          this.onSubmit();
+        }
+      }
+  
+    onSubmit = () => {
+        // console.log(axios.get('/poop'))
+        axios.get('/poop')
+            .then(function (response) {
+            console.log(response.data);
+            console.log(response.status);
+            console.log(response.statusText);
+            console.log(response.headers);
+            console.log(response.config);
+  });
+    }
     render () {
-      const {query} =this.state;
+      const {query} = this.state.query;
      
         return (
             <div className="container">
@@ -39,9 +58,11 @@ handleOnInputChange = (event) => {
                   value={query}
                   id="search-input"
                   placeholder="Search..."
+                  
                   onChange={this.handleOnInputChange}
+                  onKeyDown={this.onKeyDown}
                    />                  
-<i className="fa fa-search search-icon"/>
+                 <i className="fa fa-search search-icon"/>
               </label>
            
            
