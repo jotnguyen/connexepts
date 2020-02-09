@@ -1,13 +1,14 @@
 import React from 'react';
 import './Search.css'
 import axios from 'axios';
+import Graph from "./Graph.js"
 class Search extends React.Component{
     constructor(props) {
         super(props);
 
         this.state = {
             query: '',
-            results:{},
+            results:{ nodes : [ {id: 1, label: "?", title:"?"}], edges: []},
             loading: false,
             message: ''
         }
@@ -37,6 +38,7 @@ class Search extends React.Component{
         axios.get('/poop')
             .then(function (response) {
             console.log(response.data);
+            this.props.result = response.data;
             console.log(response.status);
             console.log(response.statusText);
             console.log(response.headers);
@@ -67,10 +69,8 @@ class Search extends React.Component{
            
            
            
-           
-           
+            <Graph result = {this.state.results}/>
             </div>
-         
         )
     }
 }

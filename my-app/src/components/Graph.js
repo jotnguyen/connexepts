@@ -30,14 +30,9 @@ const events = {
   }
 };
 
-for(var i = 0; i < 50; i++){
-  nodes.push({id: i, label: ("Node" + i)});
-  if(i>0){
-    edges.push({from:i,to:i-1});
-  }
-}
 
-edges.push({from:0,to:49});
+
+
 
 class NodeGraph extends React.Component{
   constructor(props) {
@@ -54,9 +49,10 @@ class NodeGraph extends React.Component{
   }
 
 render(){
+  const result = this.props.result;
   return(
     <div>
-      <Graph graph={{nodes, edges}} options={options} events={events} style={{ height: "640px"}} />
+      <Graph graph={result} options={options} events={events} style={{ height: "640px"}} />
     </div>
   )
   }
