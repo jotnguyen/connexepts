@@ -48,10 +48,24 @@ class NodeGraph extends React.Component{
   parseJSON = (json) => {
     console.log(JSON.parse(json));
     let node = JSON.parse(json);
-    const newGraph = {
-      nodes:  node["edges"].map( (edge) => {return {id : edge["@id"], label: edge["surfaceText"], title: edge["@id"] }} )      ,
-      edges:  node["edges"].map( ( edge) => {return {from : edge["start"]["@id"], to: edge["end"]["@id"] } })    
+
+    var startingID = node["@id"];
+
+    var nodes =  []//node["edges"].map( (edge) => {return {id : edge["@id"], label: edge["surfaceText"], title: edge["@id"] }} );
+    var edges =  []//node["edges"].map( ( edge) => {return {from : edge["start"]["@id"], to: edge["end"]["@id"] } });
+
+    console.log('length: ' + node["edges"].length);
+
+    nodes.push({id: node["@id"], label: node["@id"], title: node["@id"]})
+
+    for(var i = 0;i < node["edges"].length;i++){
+      if(node["edges"][i]["surfaceText"] != ''){
+      nodes.push({id: node["edges"][i]["@id"], label: node["edges"][i]["surfaceText"], title: node["edges"][i]["@id"]});
+      edges.push({from: startingID, to:node["edges"][i]["@id"]});
+      }
     }
+
+    const newGraph = {nodes, edges}
     return newGraph
   }
   render(){
