@@ -54,7 +54,7 @@ class Search extends React.Component{
         return (
             <div className="container">
              {/*Heading*/}
-             <h2 className="heading">Connecepts, a Concept Connection for Any and Everything</h2>
+             <h2 className="heading">Connexepts, a Concept Connection for Any and Everything</h2>
               {/* Search input*/}
               <label className="search-label" htmlFor="search-input">
                   <input
